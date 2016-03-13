@@ -131,8 +131,8 @@ void Recombination::r_discrete(Population<ValueType>& p)
 		n = static_cast<bool>(uniform_int_distribution(generator));
 		p._child->get_genotype()->push_back(parents[n][i]);
 	}
-	p.childrn_vector.push_back(*p.child);
-	p.childrn_vector.push_back(*p._child);
+	p.childrn_vector->push_back(*p.child);
+	p.childrn_vector->push_back(*p._child);
 }
 
 template <typename ValueType>

@@ -13,8 +13,8 @@ private:
 
 	Genotype<ValueType>* parent, *_parent;//особи, которые будут родителями
 	Genotype<ValueType>* child, *_child;
-	vector<Genotype<ValueType>> parent_vector;
-	vector<Genotype<ValueType>> childrn_vector;
+	vector<Genotype<ValueType>>* parent_vector;
+	vector<Genotype<ValueType>>* childrn_vector;
 
 	//функция селекции родителей
 	function<void(Population<ValueType>&)> selection;

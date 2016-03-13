@@ -157,12 +157,15 @@ int main()
 	auto temp_m = nullptr;
 	auto temp_sp = Select_In_Population::elite<int>();
 
-	Population<int> p(7807, vec, temp_s, temp_r, temp_m, temp_sp);
+	Population<int> p(100, vec, temp_s, temp_r, temp_m, temp_sp);
 
 	for (size_t i = 0; i < 500; i++)
 	{
-		p.select();
-		p.recom();
+		for (size_t j = 0; j < 50; j++)
+		{
+			p.select();
+			p.recom();
+		}
 		//p.mut();
 		p.select_in_population();
 	}

@@ -82,17 +82,18 @@ void Select_In_Population::sp_truncation(Population<ValueType>& p)
 		p.population.push_back(p.parent_vector[uniform_population(generator)]);
 }
 
+//тут надо выбирать не только из родителей и детей, но и из остальных особей популяции
 template <typename ValueType>
 void Select_In_Population::sp_elite(Population<ValueType>& p)
 {
-	p.parent_vector.insert(p.parent_vector.end() - 1, p.childrn_vector.begin(), p.childrn_vector.end());
-	sort(p.parent_vector.begin(), p.parent_vector.end(),
+	p.parent_vector->insert(p.parent_vector->end() - 1, p.childrn_vector->begin(), p.childrn_vector->end());
+	sort(p.parent_vector->begin(), p.parent_vector->end(),
 		[](Genotype<ValueType> g1, Genotype<ValueType> g2) {return (g1.get_fitness() > g2.get_fitness());});
 
 	p.population.clear();
 	for (size_t i = 0; i < p.number_of_genotype; i++)
 	{
-		p.population.push_back(p.parent_vector[i]);
+		p.population.push_back(p.parent_vector->at(i));
 	}
 }
 

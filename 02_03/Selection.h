@@ -92,16 +92,17 @@ void Selection::s_panmixia(Population<ValueType>& p)
 		p.parent = &p.population[t];
 		p._parent = &p.population[tt];
 	}
-	p.parent_vector.push_back(*p.parent);
-	p.parent_vector.push_back(*p._parent);
+	p.parent_vector->push_back(*p.parent);
+	p.parent_vector->push_back(*p._parent);
 }
 
 template<typename ValueType>
 void Selection::s_inbreeding(Population<ValueType>& p)
 {
-	sort(p.population.begin(), p.population.end(), 
+	sort(p.population.begin(), p.population.end(),
 		[](Genotype<ValueType> g1, Genotype<ValueType> g2) {return (g1.get_fitness() < g2.get_fitness());});
 	random_device rd;
+
 	mt19937 generator(rd());
 	uniform_int_distribution<> uniform_population(0, p.number_of_genotype);
 	auto t = uniform_population(generator);
@@ -109,9 +110,9 @@ void Selection::s_inbreeding(Population<ValueType>& p)
 	if (t != p.population.size() - 1)
 		p._parent = &p.population[t + 1];
 	else p._parent = &p.population[t - 1];
-
-	p.parent_vector.push_back(*p.parent);
-	p.parent_vector.push_back(*p._parent);
+	
+	p.parent_vector->push_back(*p.parent);
+	p.parent_vector->push_back(*p._parent);
 }
 
 template<typename ValueType>
@@ -141,8 +142,8 @@ void Selection::s_tournament(Population<ValueType>& p)
 	uniform_int_distribution<> distr(0, mas.size());
 	p.parent = &mas[distr(generator)];
 	p._parent = &mas[distr(generator)];
-	p.parent_vector.push_back(*p.parent);
-	p.parent_vector.push_back(*p._parent);
+	p.parent_vector->push_back(*p.parent);
+	p.parent_vector->push_back(*p._parent);
 }
 
 template<typename ValueType>
